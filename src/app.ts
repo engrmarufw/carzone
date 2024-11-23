@@ -12,9 +12,7 @@ app.use('/api', carRoutes);
 app.use('/api', orderRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  const a = 10;
-
-  res.send(a);
+  res.send('Welcome to my carzone');
 });
 
 export default app;

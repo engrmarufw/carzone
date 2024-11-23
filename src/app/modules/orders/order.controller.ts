@@ -9,6 +9,7 @@ export const createOrder = async (
   try {
     const { order: orderData } = req.body;
     const { email, car, quantity, totalPrice } = orderData;
+
     const order = await createOrderService(email, car, quantity, totalPrice);
 
     res.status(201).json({

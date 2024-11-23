@@ -12,7 +12,7 @@ export const createOrderService = async (
 ): Promise<IOrder | null> => {
   // Check if car exists and is in stock
   const car = await Car.findById(carId);
-
+  console.log(carId);
   if (!car || !car.inStock || car.quantity < quantity) {
     throw new Error('Car not available or insufficient stock');
   }
