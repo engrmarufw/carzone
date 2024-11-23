@@ -1,4 +1,5 @@
-import { Car, ICar } from './car.model';
+import { Car } from './car.model';
+import { ICar } from './car.schema';
 
 // Service to create a car
 const createCar = async (carData: Partial<ICar>) => {
