@@ -12,7 +12,7 @@ const getAllCars = async (searchTerm?: string) => {
     ? {
         $or: [
           { brand: { $regex: searchTerm, $options: 'i' } },
-          { carModel: { $regex: searchTerm, $options: 'i' } },
+          { model: { $regex: searchTerm, $options: 'i' } },
           { category: { $regex: searchTerm, $options: 'i' } },
         ],
       }
