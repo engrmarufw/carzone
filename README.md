@@ -118,6 +118,7 @@ Developed by [Md. Maruf Ahamed Prince](https://github.com/engrmarufw). If you ha
 
 ## Project Structure
 
+```
 src/
 │
 ├── app/
@@ -147,3 +148,4 @@ src/
 ├── package.json
 ├── package-lock.json
 └── README.md
+```
