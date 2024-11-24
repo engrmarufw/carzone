@@ -30,9 +30,9 @@ const getCarById = async (id: string) => {
 
 // Service to update a car by ID
 const updateCar = async (id: string, updateData: Partial<ICar>) => {
-  // If quantity is being updated, set inStock to true if quantity > 0
-  if (updateData.quantity && updateData.quantity > 0) {
-    updateData.inStock = true;
+  // Update inStock based on the quantity value
+  if (updateData.quantity !== undefined) {
+    updateData.inStock = updateData.quantity > 0;
   }
 
   const result = await Car.findByIdAndUpdate(id, updateData, {
