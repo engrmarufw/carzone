@@ -63,12 +63,13 @@ export const getCarById = async (
       data: car,
     });
   } catch (err) {
-    res.status(500).json({
-      message: 'Failed to retrieve car',
+    res.status(404).json({
+      message: 'Car not found',
       success: false,
       err,
     });
-  }
+   
+  
 };
 
 // Controller to update a car
