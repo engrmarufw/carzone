@@ -115,3 +115,35 @@ CarZone is a comprehensive backend application designed for managing a car store
 ## Author
 
 Developed by [Md. Maruf Ahamed Prince](https://github.com/engrmarufw). If you have any questions or feedback, feel free to contact me.
+
+## Project Structure
+
+src/
+│
+├── app/
+│ ├── config/
+│ │ └── index.ts
+│ ├── modules/
+│ │ ├── cars/
+│ │ │ ├── car.controller.ts
+│ │ │ ├── car.model.ts
+│ │ │ ├── car.routes.ts
+│ │ │ ├── car.schema.ts
+│ │ │ └── car.service.ts
+│ │ ├── orders/
+│ │ ├── order.controller.ts
+│ │ ├── order.model.ts
+│ │ ├── order.routes.ts
+│ │ └── order.service.ts
+│
+├── app.ts
+├── server.ts
+│
+├── .env
+├── .eslintignore
+├── .gitignore
+├── eslint.config.mjs
+├── prettier.config.json
+├── package.json
+├── package-lock.json
+└── README.md
