@@ -64,7 +64,7 @@ export const getCarById = async (
     });
   } catch (err) {
     res.status(404).json({
-      message: 'Car not found',
+      message: '404 Car not found',
       success: false,
       err,
     });
