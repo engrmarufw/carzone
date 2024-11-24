@@ -68,8 +68,7 @@ export const getCarById = async (
       success: false,
       err,
     });
-   
-  
+  }
 };
 
 // Controller to update a car
