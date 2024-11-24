@@ -31,34 +31,45 @@ export const createOrderService = async (
 
   return order;
 };
-
-// Service to calculate total revenue from all orders
 export const calculateRevenueService = async () => {
-  // Aggregate the total revenue from all orders
-  const revenue = await Order.aggregate([
-    {
-      $lookup: {
-        from: 'cars', // Referring to the 'Car' model
-        localField: 'car',
-        foreignField: '_id',
-        as: 'carDetails',
+  try {
+    const revenue = await Order.aggregate([
+      {
+        $lookup: {
+          from: 'cars', // Match the collection name exactly
+          localField: 'car',
+          foreignField: '_id',
+          as: 'carDetails',
+        },
       },
-    },
-    {
-      $unwind: '$carDetails', // Flatten the carDetails array
-    },
-    {
-      $project: {
-        totalRevenue: { $multiply: ['$quantity', '$carDetails.price'] }, // Calculate total revenue for each order
+      {
+        $unwind: {
+          path: '$carDetails',
+          preserveNullAndEmptyArrays: true,
+        },
       },
-    },
-    {
-      $group: {
-        _id: null,
-        totalRevenue: { $sum: '$totalRevenue' }, // Sum up the revenue from all orders
+      {
+        $project: {
+          totalRevenue: {
+            $cond: {
+              if: { $and: ['$quantity', '$carDetails.price'] },
+              then: { $multiply: ['$quantity', '$carDetails.price'] },
+              else: 0,
+            },
+          },
+        },
       },
-    },
-  ]);
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: '$totalRevenue' },
+        },
+      },
+    ]);
 
-  return revenue[0]?.totalRevenue || 0;
+    return revenue[0]?.totalRevenue || 0;
+  } catch (error) {
+    console.error('Error calculating revenue:', error);
+    throw error;
+  }
 };
