@@ -33,7 +33,8 @@ export const createOrderService = async (
 };
 export const calculateRevenueService = async () => {
   try {
-    const revenue = await Order.aggregate([
+    // Fetch all orders with car details
+    const orders = await Order.aggregate([
       {
         $lookup: {
           from: 'cars', // Match the collection name exactly
@@ -50,7 +51,12 @@ export const calculateRevenueService = async () => {
       },
       {
         $project: {
-          totalRevenue: {
+          email: 1,
+          car: 1,
+          quantity: 1,
+          totalPrice: 1,
+          carPrice: '$carDetails.price',
+          revenue: {
             $cond: {
               if: { $and: ['$quantity', '$carDetails.price'] },
               then: { $multiply: ['$quantity', '$carDetails.price'] },
@@ -59,17 +65,19 @@ export const calculateRevenueService = async () => {
           },
         },
       },
-      {
-        $group: {
-          _id: null,
-          totalRevenue: { $sum: '$totalRevenue' },
-        },
-      },
     ]);
 
-    return revenue[0]?.totalRevenue || 0;
+    // Calculate the total revenue
+    const totalRevenue = orders.reduce(
+      (sum, order) => sum + (order.revenue || 0),
+      0,
+    );
+
+    return {
+      totalRevenue,
+    };
   } catch (error) {
-    console.error('Error calculating revenue:', error);
+    console.error('Error fetching orders or calculating revenue:', error);
     throw error;
   }
 };
