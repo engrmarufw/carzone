@@ -112,10 +112,6 @@ CarZone is a comprehensive backend application designed for managing a car store
 
 ---
 
-## Author
-
-Developed by [Md. Maruf Ahamed Prince](https://github.com/engrmarufw). If you have any questions or feedback, feel free to contact me.
-
 ## Project Structure
 
 ```
@@ -149,3 +145,7 @@ src/
 ├── package-lock.json
 └── README.md
 ```
+
+## Author
+
+Developed by [Md. Maruf Ahamed Prince](https://github.com/engrmarufw). If you have any questions or feedback, feel free to contact me.
